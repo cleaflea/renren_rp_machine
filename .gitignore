@@ -1,6 +1,7 @@
 *.py[cod]
 *.pyc
 *.swp
+.*.swp
 *.idea
 *.sql
 MANIFEST

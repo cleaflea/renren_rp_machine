@@ -9,6 +9,11 @@ from encrypt import encryptString
 import os
 import redis
 
+import sys   
+print sys.getdefaultencoding()
+reload(sys) # Python2.5 初始化后会删除 sys.setdefaultencoding 这个方法，我们需要重新载入   
+sys.setdefaultencoding('utf-8') 
+
 cookiePath = './login_cookie'
 
 class RenRen:
@@ -146,6 +151,17 @@ class RenRen:
             cookie_dict = requests.utils.dict_from_cookiejar(self.session.cookies)
             cookie_str = '; '.join([k + '=' + v for k, v in cookie_dict.iteritems()])
             fp.write(cookie_str)
+
+    def getHomePage(self):
+        url = 'http://www.renren.com'
+        response = self.get(url)
+        #print response.encoding
+        result = response.content
+        #print type(result)
+        result = response.text.encode('utf-8')
+        #print type(result)
+        return result
+        #print result
 
     def getNotifications(self):
         url = 'http://notify.renren.com/rmessage/get?getbybigtype=1&bigtype=1&limit=50&begin=0&view=17'
