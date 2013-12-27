@@ -4,6 +4,7 @@ import sys
 from renrenapi import RenRen
 from accounts import accounts
 from BeautifulSoup import BeautifulSoup
+import time
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -57,9 +58,10 @@ def refresh():
             all_rp, today_rp = getRP(homepage)
             print "%s login and all_rp is %d, today_rp is %d" % (str(bot.email), int(all_rp), int(today_rp))
         return [bot] if bot.token else []
-   
 
 if __name__ == '__main__':
-    refresh()
+    while True:
+        refresh()
+        time.sleep(600)
 
 
